@@ -5,3 +5,5 @@ gem 'sinatra-contrib', require: 'sinatra/reloader'
 gem 'json'
 
 gem 'steam-condenser', require: 'steam-condenser'
+
+gem 'pry'
