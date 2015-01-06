@@ -4,7 +4,27 @@ describe User do
   end
 
   it "should have a list of games" do
-    assert @user.games
-    assert_equal ENV['GAME_COUNT'].to_i, @user.games.count
+    assert @user
+    assert @user.games.is_a?(Hash)
+  end
+
+  it "returns a game by its id" do
+    game = @user.find_game(id: 400)
+    assert game
+    assert_equal "Portal", game.name
+  end
+
+  it "returns a game by its short code" do
+    game = @user.find_game(short: "portal")
+    assert game
+    assert_equal 400, game.app_id
+  end
+
+  it "checks for a game by its id" do
+    assert @user.has_game?(id: 400)
+  end
+
+  it "checks for a game by its short code" do
+    assert @user.has_game?(short: "portal")
   end
 end
