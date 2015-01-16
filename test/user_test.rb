@@ -27,4 +27,13 @@ describe User do
   it "checks for a game by its short code" do
     assert @user.has_game?(short: "portal")
   end
+
+  it "should return json" do
+    get "/id/#{ENV['STEAM_USER']}"
+    last_response.headers['Content-Type'].must_equal 'application/json;charset=utf-8'
+  end
+
+  it "should return true/false for game list" do
+    skip
+  end
 end

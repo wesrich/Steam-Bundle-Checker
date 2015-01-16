@@ -11,3 +11,7 @@ require_relative '../lib/app.rb'
 include Rack::Test::Methods
 
 require_relative 'user_test'
+
+def app
+  SteamApps
+end
