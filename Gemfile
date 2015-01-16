@@ -10,6 +10,7 @@ gem 'sinatra-sequel'
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
 
+gem 'omniauth-steam'
 gem 'steam-condenser', require: 'steam-condenser'
 
 gem 'pry'
