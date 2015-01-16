@@ -1,3 +1,4 @@
+require 'sinatra/json'
 require_relative 'steam'
 
 class SteamApps < Sinatra::Base
@@ -25,7 +26,7 @@ class SteamApps < Sinatra::Base
   end
 
   get '/' do
-    "Hello World"
+    json session[:uid]
   end
 
   post '/auth/steam/callback' do
