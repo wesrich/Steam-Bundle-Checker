@@ -6,7 +6,6 @@ class SteamApps < Sinatra::Base
 
   configure do
     enable :sessions
-    DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://db/database.sqlite3')
 
     use OmniAuth::Builder do
       provider :steam, ENV['STEAM_KEY']
@@ -20,7 +19,7 @@ class SteamApps < Sinatra::Base
   end
 
   before do
-    pass if require.path_info =~ /^\/auth\//
+    pass if request.path_info =~ /^\/auth\//
 
     redirect to('/auth/steam') unless current_user
   end
@@ -31,7 +30,8 @@ class SteamApps < Sinatra::Base
 
   post '/auth/steam/callback' do
     session[:uid] = env['omniauth.auth']['uid']
-    redirect to('/')
+    json env['omniauth.auth']
+    # redirect to('/')
   end
 
   get '/auth/failure' do
