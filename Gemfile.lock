@@ -13,6 +13,7 @@ GEM
     backports (3.6.4)
     bacon (1.2.0)
     coderay (1.1.0)
+    dotenv (1.0.2)
     hashie (3.3.2)
     json (1.8.1)
     kgio (2.9.3)
@@ -42,6 +43,7 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     raindrops (0.13.0)
+    rake (10.4.2)
     ruby-openid (2.6.0)
     sequel (4.18.0)
     sinatra-contrib (1.4.2)
@@ -70,10 +72,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   json
   omniauth-steam
   pg
   pry
+  rake
+  sequel
   sinatra!
   sinatra-contrib
   sinatra-sequel
