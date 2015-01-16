@@ -6,6 +6,10 @@ gem 'sinatra-contrib', require: 'sinatra/reloader'
 gem 'json'
 gem 'unicorn'
 
+gem 'sinatra-sequel'
+gem 'sqlite3', group: :development
+gem 'pg', group: :production
+
 gem 'steam-condenser', require: 'steam-condenser'
 
 gem 'pry'
