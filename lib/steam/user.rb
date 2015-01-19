@@ -1,9 +1,17 @@
 module Steam
   class User < Sequel::Model
-    attr_reader :account
+    plugin :timestamps
 
-    def initialize(id)
-      @account = SteamId.new(id)
+    def account
+      @account ||= SteamId.new(uid)
+    end
+
+    def self.from_auth(auth)
+      User.find_or_create(uid: auth[:uid]) do |user|
+        user.name = auth[:info][:nickname]
+        user.avatar = auth[:info][:image]
+        user.is_public = auth[:extra][:raw_info][:communityvisibilitystate] == 3
+      end
     end
 
     # def self.find(id: nil)
