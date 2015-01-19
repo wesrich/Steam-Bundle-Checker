@@ -11,11 +11,8 @@ gem 'unicorn'
 gem 'sequel'
 gem 'sinatra-sequel'
 
-group :development do
-  gem 'dotenv'
-  gem 'sqlite3'
-end
-gem 'pg', group: :production
+gem 'dotenv'
+gem 'pg'
 
 gem 'omniauth-steam'
 gem 'steam-condenser', require: 'steam-condenser'

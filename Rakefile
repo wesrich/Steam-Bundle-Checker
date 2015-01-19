@@ -13,10 +13,6 @@ namespace :db do
   task :setup do
     Sequel.extension :migration
 
-    if ENV['RACK_ENV'] == 'production'
-      @database = Sequel.postgres ENV['DATABASE_URL']
-    else
-      @database = Sequel.sqlite "db/#{ENV['RACK_ENV']}.sqlite3"
-    end
+    @database = Sequel.connect ENV['DATABASE_URL']
   end
 end
