@@ -3,7 +3,7 @@ module Steam
     plugin :timestamps
 
     def account
-      @account ||= SteamId.new(uid)
+      @account ||= SteamId.new(uid.to_i)
     end
 
     def self.from_auth(auth)
@@ -19,7 +19,7 @@ module Steam
     # end
 
     def games
-      @account.games
+      account.games
     end
 
     def find_game(id: nil, short: nil)
