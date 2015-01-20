@@ -13,6 +13,7 @@ gem 'sinatra-sequel'
 
 gem 'dotenv'
 gem 'pg'
+gem 'minitest', group: :test
 
 gem 'omniauth-steam'
 gem 'steam-condenser', require: 'steam-condenser'

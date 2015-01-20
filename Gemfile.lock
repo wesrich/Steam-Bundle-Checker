@@ -18,6 +18,7 @@ GEM
     json (1.8.1)
     kgio (2.9.3)
     method_source (0.8.2)
+    minitest (5.5.1)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     omniauth (1.2.2)
@@ -73,6 +74,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   json
+  minitest
   omniauth-steam
   pg
   pry
