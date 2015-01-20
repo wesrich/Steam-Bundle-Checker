@@ -11,6 +11,7 @@ module Steam
           raw_info: { communityvisibilitystate: 3 }
         }
       }
+      User.from_auth(@auth_data).destroy
       @user = User.from_auth(@auth_data)
     end
 
@@ -19,8 +20,7 @@ module Steam
     end
 
     it "should have a list of games" do
-      skip "NYI"
-      assert @user.games.is_a?(Hash)
+      assert @user.game_list.is_a?(Hash)
     end
 
     it "returns a game by its id" do
