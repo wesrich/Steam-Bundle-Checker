@@ -11,12 +11,12 @@ module Steam
     end
 
     def find_game(id: nil, short: nil)
-      return games[id] unless id.nil?
-      games.select { |id, game| game.short_name == short }.values.first
+      return game_list.values_at(id.to_s).first unless id.nil?
+      game_list.select { |id, game| game.short_name == short }.values.first
     end
 
     def has_game?(id: nil, short: nil)
-      find_game(id: id, short: short).is_a? SteamGame
+      game_list.key?(id) or game_list.value?(short)
     end
 
     def game_list
@@ -35,8 +35,9 @@ module Steam
     end
 
     def fetch_games
-      self.games = account.games.map { |app_id,game| [app_id, game.short_name] }
-                          .to_h.to_json
+      self.games = account.games.map { |app_id,game|
+        [app_id, game.short_name]
+      }.to_h.to_json
     end
   end
 end

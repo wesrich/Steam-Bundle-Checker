@@ -24,10 +24,9 @@ module Steam
     end
 
     it "returns a game by its id" do
-      skip "Reimplement"
       game = @user.find_game(id: 400)
       assert game
-      assert_equal "Portal", game.name
+      assert_equal "portal", game
     end
 
     it "returns a game by its short code" do
@@ -38,12 +37,10 @@ module Steam
     end
 
     it "checks for a game by its id" do
-      skip "Reimplement"
       assert @user.has_game?(id: 400)
     end
 
     it "checks for a game by its short code" do
-      skip "Reimplement"
       assert @user.has_game?(short: "portal")
     end
 
