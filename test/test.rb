@@ -9,10 +9,12 @@ Dotenv.load
 
 require_relative '../lib/app.rb'
 
-include Rack::Test::Methods
+# module Steam
+  include Rack::Test::Methods
+# end
 
 require_relative 'user_test'
 
 def app
-  SteamApps
+  Steam::SteamApps
 end

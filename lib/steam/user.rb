@@ -12,7 +12,7 @@ module Steam
 
     def find_game(id: nil, short: nil)
       return game_list.values_at(id.to_s).first unless id.nil?
-      game_list.select { |id, game| game.short_name == short }.values.first
+      game_list.select { |id, game| game == short }.keys.first
     end
 
     def has_game?(id: nil, short: nil)

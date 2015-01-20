@@ -30,10 +30,9 @@ module Steam
     end
 
     it "returns a game by its short code" do
-      skip "Reimplement"
       game = @user.find_game(short: "portal")
       assert game
-      assert_equal 400, game.app_id
+      assert_equal "400", game
     end
 
     it "checks for a game by its id" do
@@ -44,10 +43,18 @@ module Steam
       assert @user.has_game?(short: "portal")
     end
 
+    it "should redirect authentication to Steam" do
+      get "/"
+      assert last_response.redirect?
+      follow_redirect!
+      assert last_response.headers["Location"].starts_with?('https://steamcommunity.com/openid/login')
+    end
+
     it "should return json" do
-      skip "Reimplement"
-      get "/id/#{ENV['STEAM_USER']}"
-      last_response.headers['Content-Type'].must_equal 'application/json;charset=utf-8'
+      skip "NYI"
+      get "/id/#{@user.id}"
+      assert last_response.ok?
+      assert_equal 'application/json;charset=utf-8', last_response.headers['Content-Type']
     end
 
     it "should return true/false for game list" do
