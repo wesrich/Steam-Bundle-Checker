@@ -16,7 +16,14 @@ module Steam
     end
 
     def has_game?(id: nil, short: nil)
-      game_list.key?(id) or game_list.value?(short)
+      return game_list.key?(id) unless id.nil?
+      game_list.value?(short)
+    end
+
+    def has_games?(list)
+      list.split(",").map do |game|
+        game[/\A\d+\z/] ? has_game?(id: game) : has_game?(short: game)
+      end
     end
 
     def game_list

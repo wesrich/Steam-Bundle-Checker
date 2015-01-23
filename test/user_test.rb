@@ -36,11 +36,23 @@ module Steam
     end
 
     it "checks for a game by its id" do
-      assert @user.has_game?(id: 400)
+      assert @user.has_game?(id: "400")
     end
 
     it "checks for a game by its short code" do
       assert @user.has_game?(short: "portal")
+    end
+
+    it "checks for an unowned game by id" do
+      refute @user.has_game?(id: "202970")
+    end
+
+    it "checks for a list of games" do
+      assert_equal [true,true], @user.has_games?("portal,400")
+    end
+
+    it "checks for a list of unowned games" do
+      assert_equal [true,true,false], @user.has_games?("portal,400,202970")
     end
 
     it "should redirect authentication to Steam" do
