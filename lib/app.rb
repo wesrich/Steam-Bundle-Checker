@@ -20,6 +20,7 @@ module Steam
     end
 
     before do
+      response["Access-Control-Allow-Origin"] = "*"
       pass if request.path_info =~ /^\/(auth|users)\//
 
       redirect to('/auth/steam') unless current_user
