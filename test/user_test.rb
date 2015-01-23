@@ -76,7 +76,7 @@ module Steam
       get "/users/#{@user.id}/games?list=#{data.keys.join(',')}"
       assert last_response.ok?, "Request Status: #{last_response.status}"
       assert_equal 'application/json', last_response.headers['Content-Type']
-      assert_equal data, JSON.parse(last_response.body)
+      assert_equal data, JSON.parse(last_response.body)["games"]
     end
   end
 end
