@@ -23,6 +23,10 @@ module Steam
       JSON.parse(games)
     end
 
+    def to_json(args)
+      super args.merge({except: [:uid, :games]})
+    end
+
     private
 
     def before_create

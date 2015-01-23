@@ -51,14 +51,17 @@ module Steam
     end
 
     it "should return json" do
-      skip "NYI"
-      get "/id/#{@user.id}"
-      assert last_response.ok?
-      assert_equal 'application/json;charset=utf-8', last_response.headers['Content-Type']
+      get "/users/#{@user.id}"
+      assert last_response.ok?, "Request Status: #{last_response.status}"
+      assert_equal 'application/json', last_response.headers['Content-Type']
+      assert_equal @user.id, JSON.parse(last_response.body)['id']
     end
 
     it "should return true/false for game list" do
-      skip "NYI"
+      get "/users/#{@user.id}/games?list=portal,400"
+      assert last_response.ok?, "Request Status: #{last_response.status}"
+      assert_equal 'application/json', last_response.headers['Content-Type']
+      assert_equal [true, true], JSON.parse(last_response.body)
     end
   end
 end

@@ -20,22 +20,27 @@ module Steam
     end
 
     before do
-      pass if request.path_info =~ /^\/auth\//
+      pass if request.path_info =~ /^\/(auth|users)\//
 
       redirect to('/auth/steam') unless current_user
     end
 
     get '/' do
-      json session[:uid]
+      json User.where(uid: session[:uid]).first
     end
 
     post '/auth/steam/callback' do
       session[:uid] = env['omniauth.auth']['uid']
       # json env['omniauth.auth']
-      redirect to('/')
+      user = User.from_auth(env['omniauth.auth'])
+      redirect to("/users/#{user.id}")
     end
 
     get '/auth/failure' do
+    end
+
+    get '/users/:user_id' do
+      json User.find(id: params[:user_id])
     end
   end
 end
