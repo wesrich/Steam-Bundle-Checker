@@ -42,5 +42,10 @@ module Steam
     get '/users/:user_id' do
       json User.find(id: params[:user_id])
     end
+
+    get '/users/:user_id/games' do
+      user = User.find(id: params[:user_id])
+      json user.has_games?(params[:list])
+    end
   end
 end

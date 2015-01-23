@@ -70,10 +70,10 @@ module Steam
     end
 
     it "should return true/false for game list" do
-      get "/users/#{@user.id}/games?list=portal,400"
+      get "/users/#{@user.id}/games?list=portal,400,202970"
       assert last_response.ok?, "Request Status: #{last_response.status}"
       assert_equal 'application/json', last_response.headers['Content-Type']
-      assert_equal [true, true], JSON.parse(last_response.body)
+      assert_equal [true, true,false], JSON.parse(last_response.body)
     end
   end
 end
