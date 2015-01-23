@@ -48,11 +48,13 @@ module Steam
     end
 
     it "checks for a list of games" do
-      assert_equal [true,true], @user.has_games?("portal,400")
+      data = { "portal" => true, "400" => true }
+      assert_equal data, @user.has_games?("portal,400")
     end
 
     it "checks for a list of unowned games" do
-      assert_equal [true,true,false], @user.has_games?("portal,400,202970")
+      data = { "portal" => true, "400" => true, "202970" => false }
+      assert_equal data, @user.has_games?("portal,400,202970")
     end
 
     it "should redirect authentication to Steam" do
@@ -70,10 +72,11 @@ module Steam
     end
 
     it "should return true/false for game list" do
-      get "/users/#{@user.id}/games?list=portal,400,202970"
+      data = { "portal" => true, "400" => true, "202970" => false }
+      get "/users/#{@user.id}/games?list=#{data.keys.join(',')}"
       assert last_response.ok?, "Request Status: #{last_response.status}"
       assert_equal 'application/json', last_response.headers['Content-Type']
-      assert_equal [true, true,false], JSON.parse(last_response.body)
+      assert_equal data, JSON.parse(last_response.body)
     end
   end
 end

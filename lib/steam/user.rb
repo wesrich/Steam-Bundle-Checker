@@ -21,9 +21,9 @@ module Steam
     end
 
     def has_games?(list)
-      list.split(",").map do |game|
-        game[/\A\d+\z/] ? has_game?(id: game) : has_game?(short: game)
-      end
+      list.split(",").map { |game|
+        [game, game[/\A\d+\z/] ? has_game?(id: game) : has_game?(short: game)]
+      }.to_h
     end
 
     def game_list
